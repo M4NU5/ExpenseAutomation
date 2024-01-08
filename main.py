@@ -35,17 +35,19 @@ def get_filtered_sheet_rows(sheet, timestamp_column_index):
     return filtered_rows
 
 def get_bank_filtered_transactions(response):
+    
     whitelist = os.getenv("WHITELIST")
     current_year = datetime.now().year
     current_month = datetime.now().month
     bank_filtered_transactions = []
+    print("")
     for element in response.json()["mandates"]:
         if "lastDate" in element:
             timestamp = parse_timestamp(element["lastDate"])
             if element["originatorName"] in whitelist and timestamp.year == current_year and timestamp.month == current_month:
                 bank_filtered_transactions.append(element)
-                print(element)
-                print("")
+                print(f"{element['lastDate']}-{element['originatorName']}: £{element['lastPayment']['lastAmount']['minorUnits'] / 100}")
+    print("")
     return bank_filtered_transactions
 
 
@@ -88,7 +90,7 @@ sheet = client.open('Digs Expensing').worksheet("5 Wimbledon Park Rd")
 timestamp_column_index = 0
 filtered_expensed_rows  = get_filtered_sheet_rows(sheet, timestamp_column_index)
 
-print(f"Bank Debit Orders: {len(bank_filtered_transactions)} \nExpensed count: {len(filtered_expensed_rows)}")
+print(f"Bank Debit Orders: {len(bank_filtered_transactions)} \nExpensed: {len(filtered_expensed_rows)} \n")
 for bank_transaction in bank_filtered_transactions:
     exists = False
     for expensed_transaction in filtered_expensed_rows:
@@ -97,7 +99,7 @@ for bank_transaction in bank_filtered_transactions:
     if not exists:
         row = [bank_transaction['lastDate'], bank_transaction['originatorName'], bank_transaction['lastPayment']['lastAmount']['minorUnits'] / 100]
         print(f"Being appended {row}")
-        # sheet.append_row(row)
+        sheet.append_row(row)
 
 
 print("Script complete")
