@@ -5,7 +5,7 @@ Starling_API --(script)-> Google Sheets --(zapier)-> Splitwise_API
 # Install
 Setup Google Sheet & Google access
 
-Setup Zapier Zap
+Setup Zapier Zap (Google sheet --> Splitwise)
 
 Setup Bank Access
 
