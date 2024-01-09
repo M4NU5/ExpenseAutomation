@@ -1,8 +1,8 @@
 # Features to add
-- Schedule execution of lamda or gcloud function
-- Post notification to channel about expenses added
+- Schedule github action
+- Post notification to personal & public channels about expenses
 
 
 # Process flow
 
-Starling_bank --(script)-> Google Sheets --(zapier)-> Splitwise
+Starling_API --(script)-> Google Sheets --(zapier)-> Splitwise_API
