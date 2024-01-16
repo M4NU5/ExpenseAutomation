@@ -3,7 +3,7 @@ name: Expense Automation Workflow
 on:
   push:
     branches:
-      - main  # or the branch you want to trigger the workflow on
+      - master  # or the branch you want to trigger the workflow on
 
 jobs:
   run-python-script:
