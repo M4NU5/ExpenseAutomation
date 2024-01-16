@@ -22,4 +22,7 @@ jobs:
       run: pip install -r requirements.txt  # Install any required packages listed in requirements.txt
 
     - name: Run Python Script
+      env:
+        STARLING_TOKEN: ${{ secrets.STARLING_TOKEN }}
+        GOOGLE_AUTH: ${{ secrets.GOOGLE_AUTH }}
       run: python main.py  # Adjust the path and name to your script
