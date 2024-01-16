@@ -5,9 +5,9 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime
 
-def check_envs(google_token):
-    if not os.path.exists(google_token):
-        raise FileNotFoundError(f"Google File {google_token} not found. Abort")
+def check_envs(GOOGLE_AUTH):
+    if not os.path.exists(GOOGLE_AUTH):
+        raise FileNotFoundError(f"Google File {GOOGLE_AUTH} not found. Abort")
     env_var_check = ["STARLING_TOKEN", "WHITELIST"]
     for var in env_var_check:
         if os.getenv(var) is None:
@@ -60,8 +60,9 @@ SPLITWISE_API = 'https://secure.splitwise.com/api/v3.0'
 
 #Load env
 load_dotenv()
-google_token = "token.json"
-check_envs(google_token)
+# Local Execute
+GOOGLE_AUTH = os.getenv("GOOGLE_AUTH") # "token.json"
+# check_envs(GOOGLE_AUTH)
 # Creds
 STARLING_TOKEN = os.getenv("STARLING_TOKEN")
 
@@ -82,7 +83,7 @@ bank_filtered_transactions = get_bank_filtered_transactions(response)
 # Authentication
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(google_token, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_AUTH, scope)
 client = gspread.authorize(creds)
 
 sheet = client.open('Digs Expensing').worksheet("5 Wimbledon Park Rd")
