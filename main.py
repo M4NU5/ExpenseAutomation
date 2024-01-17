@@ -61,8 +61,9 @@ SPLITWISE_API = 'https://secure.splitwise.com/api/v3.0'
 #Load env
 load_dotenv()
 # Local Execute
-GOOGLE_AUTH = os.getenv("GOOGLE_AUTH") # "token.json"
-# check_envs(GOOGLE_AUTH)
+# GOOGLE_AUTH = os.getenv("GOOGLE_AUTH") # 
+GOOGLE_AUTH = "token.json"
+check_envs(GOOGLE_AUTH)
 # Creds
 STARLING_TOKEN = os.getenv("STARLING_TOKEN")
 
