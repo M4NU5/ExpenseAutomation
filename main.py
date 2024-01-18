@@ -8,7 +8,7 @@ from datetime import datetime
 def check_envs(GOOGLE_AUTH):
     if not os.path.exists(GOOGLE_AUTH):
         raise FileNotFoundError(f"Google File {GOOGLE_AUTH} not found. Abort")
-    env_var_check = ["STARLING_TOKEN", "WHITELIST"]
+    env_var_check = ["STARLING_TOKEN"]
     for var in env_var_check:
         if os.getenv(var) is None:
             raise ValueError(f"Environment Variable {var} not set. Abort")
