@@ -40,6 +40,7 @@ def get_bank_filtered_transactions(response):
     current_month = datetime.now().month
     bank_filtered_transactions = []
     print("")
+    print(response.json())
     for element in response.json()["mandates"]:
         if "lastDate" in element:
             timestamp = parse_timestamp(element["lastDate"])
