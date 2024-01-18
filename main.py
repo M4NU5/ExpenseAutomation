@@ -8,7 +8,7 @@ from datetime import datetime
 def check_envs(GOOGLE_AUTH):
     if not os.path.exists(GOOGLE_AUTH):
         raise FileNotFoundError(f"Google File {GOOGLE_AUTH} not found. Abort")
-    env_var_check = ["STARLING_TOKEN"]
+    env_var_check = [ "STARLING_TOKEN" ]
     for var in env_var_check:
         if os.getenv(var) is None:
             raise ValueError(f"Environment Variable {var} not set. Abort")
@@ -39,14 +39,17 @@ def get_bank_filtered_transactions(response):
     current_year = datetime.now().year
     current_month = datetime.now().month
     bank_filtered_transactions = []
+
     print("")
-    print(response.json())
-    for element in response.json()["mandates"]:
-        if "lastDate" in element:
-            timestamp = parse_timestamp(element["lastDate"])
-            if element["originatorName"] in whitelist and timestamp.year == current_year and timestamp.month == current_month:
-                bank_filtered_transactions.append(element)
-                print(f"{element['lastDate']}-{element['originatorName']}: £{element['lastPayment']['lastAmount']['minorUnits'] / 100}")
+    try:
+        for element in response.json()["mandates"]:
+            if "lastDate" in element:
+                timestamp = parse_timestamp(element["lastDate"])
+                if element["originatorName"] in whitelist and timestamp.year == current_year and timestamp.month == current_month:
+                    bank_filtered_transactions.append(element)
+                    print(f"{element['lastDate']}-{element['originatorName']}: £{element['lastPayment']['lastAmount']['minorUnits'] / 100}")
+    except:
+        print(response.json())
     print("")
     return bank_filtered_transactions
 
@@ -66,7 +69,6 @@ GOOGLE_AUTH = "token.json"
 check_envs(GOOGLE_AUTH)
 # Creds
 STARLING_TOKEN = os.getenv("STARLING_TOKEN")
-
 
 
 # Define headers for API requests

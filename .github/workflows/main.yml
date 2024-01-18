@@ -1,9 +1,9 @@
 name: Expense Automation Workflow
 
 on:
-  push:
-    branches:
-      - master  # or the branch you want to trigger the workflow on
+  schedule:
+    # Runs at 12:00 PM UTC every Monday
+    - cron: '0 12 * * 1'
 
 jobs:
   run-python-script:
