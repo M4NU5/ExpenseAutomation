@@ -35,7 +35,10 @@ def get_filtered_sheet_rows(sheet, timestamp_column_index):
     return filtered_rows
 
 def get_bank_filtered_transactions(response):
-    whitelist = ["Octopus Energy", "Thames Water", "Community Fibre" ]
+    # =============================
+    # Set bank transactions to sync
+    # =============================
+    whitelist = ["Octopus Energy", "Thames Water", "Community Fibre", "Wandsworth Council" ]
     current_year = datetime.now().year
     current_month = datetime.now().month
     bank_filtered_transactions = []
