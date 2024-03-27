@@ -1,3 +1,4 @@
+import sys
 import requests
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
@@ -7,11 +8,13 @@ from datetime import datetime
 
 def check_envs(GOOGLE_AUTH):
     if not os.path.exists(GOOGLE_AUTH):
-        raise FileNotFoundError(f"Google File {GOOGLE_AUTH} not found. Abort")
+        print(f"Google File {GOOGLE_AUTH} not found. Abort")
+        sys.exit()
     env_var_check = [ "STARLING_TOKEN" ]
     for var in env_var_check:
         if os.getenv(var) is None:
-            raise ValueError(f"Environment Variable {var} not set. Abort")
+            print(f"Environment Variable {var} not set. Abort")
+            sys.exit()
         else:
             print(f"{var} Loaded")
     # Load Environment Variables
