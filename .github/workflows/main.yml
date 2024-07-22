@@ -4,6 +4,8 @@ on:
   schedule:
     # Runs at 12:00 PM UTC every Monday
     - cron: '0 12 * * 1'
+  workflow_dispatch: # Allows manual triggering of the workflow
+
 
 jobs:
   run-python-script:
